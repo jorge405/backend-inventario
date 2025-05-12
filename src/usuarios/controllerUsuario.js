@@ -11,10 +11,12 @@ export const authUser= async(req,res)=>{
         }else{
             const {cod_usuario}= rows[0];   
             const {token,expiresIn} = generateToken(cod_usuario,usuario,pass);
+                    
                     return res.status(200).json({
                         msg:'contraseña y usuario correcto',
                         token,
-                        expiresIn
+                        expiresIn,
+                        data:{usuario,cod_usuario}
                     })    
         }
     } catch (error) {

@@ -5,9 +5,9 @@ const routerUser= express.Router();
 
 
 
-routerUser.get('/authUser',authUser);
 routerUser.get('/getUser',verifyToken,getUsuarios);
-routerUser.post('/addUser',addUser);
+routerUser.post('/authUser',authUser);
+routerUser.post('/addUser',verifyToken,addUser);
 routerUser.patch('/updateUser/:id',updateUser);
 routerUser.delete('/deleteUser/:id',deleteUser);
 
