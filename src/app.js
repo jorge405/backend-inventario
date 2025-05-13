@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import {PORT} from './config.js';
 import routerUser from './usuarios/routerUsuario.js';
+import routerProducto from './producto/routerProducto.js';
 const app= express();
 
 
@@ -13,6 +14,7 @@ app.use(cors()) // arreglar el problema de especificar problema de cors en espec
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use('/inventario',routerUser)
+app.use('/inventario',routerProducto)
 app.set('port',PORT)
 
 
