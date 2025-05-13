@@ -7,7 +7,7 @@ export const authUser= async(req,res)=>{
     try {   
         const [rows]= await pool.query('SELECT cod_usuario,usuario,pass FROM usuario WHERE usuario=? AND pass=?',[usuario,pass]);
         if(rows.length===0){
-            return res.status(401).json({message:'usuario o contraseña incorrectos'})
+            return res.status(401).json({msg:'usuario o contraseña incorrectos'})
         }else{
             const {cod_usuario}= rows[0];   
             const {token,expiresIn} = generateToken(cod_usuario,usuario,pass);
@@ -21,7 +21,7 @@ export const authUser= async(req,res)=>{
         }
     } catch (error) {
         console.log('problemas al autenticar el usuario: ',error)
-        return res.status(500).json({message:'error en el servidor espere un momento'})
+        return res.status(500).json({msg:'error en el servidor espere un momento'})
     }
 }
 
@@ -29,11 +29,11 @@ export const getUsuarios = async(req,res)=>{
     try {
         
         const [rows]= await pool.query('SELECT * FROM usuario WHERE estado_int=1')    
-        console.log(rows)
+        
         res.status(200).json(rows);
     } catch (error) {
         console.log('problemas al obtener los usuarios:',error)
-        res.status(500).json({message:'error en el servidor espere un momento'})
+        res.status(500).json({msg:'error en el servidor espere un momento'})
     }
 }
 
@@ -41,14 +41,15 @@ export const addUser= async(req,res)=>{
 
     try {
         const {usuario,pass,estado_int} = req.body
+        
         const [rows] = await pool.query('INSERT INTO usuario(usuario,pass,estado_int) VALUES(?,?,?)',[usuario,pass,estado_int])
         if(rows.affectedRows===1){
-            res.status(200).json({message:'usuario agregado correctamente'})    
+            res.status(200).json({msg:'usuario creado'})    
         }
         
     } catch (error) {
         console.log('problemas al agregar el usuario:', error)
-        res.status(500).json({message:'error en el servidor espere un momento'})        
+        res.status(500).json({msg:'error en el servidor espere un momento'})        
     }
 }
 
