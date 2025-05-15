@@ -120,3 +120,90 @@ export const addUso= async(req,res)=>{
         })
     }
 }
+
+
+export const getLaboratorio = async (req,res)=>{
+        
+    try {
+        const [rows]= await pool.query('select cod_laboratorio,laboratorio from laboratorio where estado_int=1 ')
+        if (rows) {
+            res.status(200).json({
+                msg:'ok',
+                datos:rows,
+                status:'200'
+            })
+        }else{
+            res.status(204).json({
+                msg:'ok vacio',
+                status:'204'
+            })
+        }
+   
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            msg:'error en el servidor',
+            status:'500'
+        })    
+    }        
+        
+}
+
+export const getPresentacion = async (req,res)=>{
+        
+    try {
+        const [rows]= await pool.query('select cod_presentacion,presentacion from presentacion where estado_int=1 ')
+        if (rows) {
+            res.status(200).json({
+                msg:'ok',
+                datos:rows,
+                status:'200'
+            })
+        }else{
+            res.status(204).json({
+                msg:'ok vacio',
+                status:'204'
+            })
+        }
+   
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            msg:'error en el servidor',
+            status:'500'
+        })    
+    }        
+        
+}
+
+
+export const getUso = async (req,res)=>{
+        
+    try {
+        const [rows]= await pool.query('select cod_uso,uso from uso where estado_int=1 ')
+        if (rows) {
+            res.status(200).json({
+                msg:'ok',
+                datos:rows,
+                status:'200'
+            })
+        }else{
+            res.status(204).json({
+                msg:'ok vacio',
+                status:'204'
+            })
+        }
+   
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            msg:'error en el servidor',
+            status:'500'
+        })    
+    }        
+        
+}
+

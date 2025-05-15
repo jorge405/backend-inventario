@@ -1,6 +1,6 @@
 import express from 'express'
 import { verifyToken } from '../utils/auth.js'
-import {getProducto,addProducto,addLaboratorio,addPresentacion,addUso} from '../producto/controllerProducto.js'
+import {getProducto,addProducto,addLaboratorio,addPresentacion,addUso,getLaboratorio,getPresentacion,getUso} from '../producto/controllerProducto.js'
 
 const routerProducto= express.Router();
 
@@ -11,6 +11,8 @@ routerProducto.post('/addProducto',verifyToken,addProducto)
 routerProducto.post('/addLaboratorio',verifyToken,addLaboratorio)
 routerProducto.post('/addPresentacion',verifyToken,addPresentacion)
 routerProducto.post('/addUso',verifyToken,addUso)
-
+routerProducto.get('/getLaboratorio',verifyToken,getLaboratorio)
+routerProducto.get('/getPresentacion',verifyToken,getPresentacion)
+routerProducto.get('/getUso',verifyToken,getUso)
 
 export default routerProducto;
