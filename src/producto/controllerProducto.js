@@ -48,10 +48,34 @@ export const addProducto= async (req,res)=>{
     }
 }
 
+export const addStock= async(req,res)=>{
+    const {cantidad_inicial,stock,fecha_registro} = req.body;
+    try {
+        const [rows]= await pool.query('insert into stock_producto (cantidad_inicial,stock,fecha_registro) values(?,?,?)',[cantidad_inicial,stock,fecha_registro])
+            if (rows.affectedRows===1) {
+                res.status(200).json({
+                    msg:'creado',
+                    status:'200'
+                })    
+            }else{
+               res.status(204).json({
+                msg:'stock no creado',
+                status:'204'
+               })
+            }    
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            msg:'error en el servidor',
+            status:'500'
+        })
+    }
+}
+
 export const addLaboratorio= async(req,res)=>{
     try {
-        const {laboratorio} = req.body
-        const [rows]= await pool.query('insert into laboratorio(laboratorio) values (?)',[laboratorio])
+        const {laboratorio,estado_int} = req.body
+        const [rows]= await pool.query('insert into laboratorio(laboratorio,estado_int) values (?,?)',[laboratorio,estado_int])
         if (rows.affectedRows===1) {
             res.status(200).json({
                 msg:'creado',
@@ -74,8 +98,8 @@ export const addLaboratorio= async(req,res)=>{
 
 export const addPresentacion = async(req,res)=>{
     try {
-        const {presentacion} = req.body;
-        const [rows]= await pool.query('insert into presentacion(presentacion) values(?)',[presentacion])
+        const {presentacion,estado_int} = req.body;
+        const [rows]= await pool.query('insert into presentacion(presentacion,estado_int) values(?,?)',[presentacion,estado_int])
         if (rows.affectedRows===1) {
             res.status(200).json({
                 msg:'creado',
@@ -99,8 +123,8 @@ export const addPresentacion = async(req,res)=>{
 
 export const addUso= async(req,res)=>{
     try {
-        const {uso}=req.body;
-        const [rows] = await pool.query('insert into uso(uso) values(?)',[uso])
+        const {uso,estado_int}=req.body;
+        const [rows] = await pool.query('insert into uso(uso,estado_int) values(?,?)',[uso,estado_int])
         if (rows.affectedRows===1) {
             res.status(200).json({
                 msg:'creado',

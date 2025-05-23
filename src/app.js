@@ -3,6 +3,7 @@ import cors from 'cors';
 import {PORT} from './config.js';
 import routerUser from './usuarios/routerUsuario.js';
 import routerProducto from './producto/routerProducto.js';
+import routerProveedor from './proveedor/routerProveedor.js';
 const app= express();
 
 
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use('/inventario',routerUser)
 app.use('/inventario',routerProducto)
+app.use('/inventario',routerProveedor)
 app.set('port',PORT)
 
 

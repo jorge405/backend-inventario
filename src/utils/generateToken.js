@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 const secretkey = process.env.SECRET_KEY 
 
 export const generateToken = (uid,us,pass) => {
-    const expiresIn= 60*30; //
+    const expiresIn='30m'; // 1 hour	
     try {
         const token = jwt.sign({uid,us,pass},secretkey,{expiresIn});
         return {token,expiresIn};    
