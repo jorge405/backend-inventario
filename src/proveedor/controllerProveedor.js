@@ -2,9 +2,9 @@ import {pool} from '../DB/conecction.js'
 
 
 export const addProveedor= async(req,res)=>{
-    const {nombre_proveedor,direccion,celular} = req.body
+    const {nombre_proveedor,direccion,celular,estado_int} = req.body
     try {
-        const [rows] = await pool.query('insert into proveedor (nombre_proveedor,dreccion,celular) values(?,?,?)',[nombre_proveedor,direccion,celular])
+        const [rows] = await pool.query('insert into proveedor (nombre_proveedor,direccion,celular,estado_int) values(?,?,?,?)',[nombre_proveedor,direccion,celular,estado_int])
         if (rows.affectedRows===1) {
             res.status(200).json({
                 msg:'creado',
@@ -27,7 +27,7 @@ export const addProveedor= async(req,res)=>{
 
 export const getProveedor= async(req,res)=>{
     try {
-        const [rows] = await pool.query('select cod_proveedor,nombre_proveedor,direccion,celular')
+        const [rows] = await pool.query('select cod_proveedor,nombre_proveedor,direccion,celular from proveedor where estado_int=1')
         if (rows) {
             res.status(200).json({
                 msg:'ok',
