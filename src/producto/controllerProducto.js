@@ -5,7 +5,7 @@ import {pool} from '../DB/conecction.js'
 export const getProducto= async (req,res)=>{
     
     try {
-        const [rows]= await pool.query('select p.cod_producto,p.nombre_cientifico,p.nombre_comercial,p.contenido,p.medicion,p.fecha_vencimiento,p.precio_unit,l.laboratorio,pr.presentacion,u.uso,p.estado_int from producto_medicamento as p INNER JOIN laboratorio as l on p.cod_laboratorio=l.cod_laboratorio INNER JOIN presentacion as pr on p.cod_presentacion=pr.cod_presentacion INNER JOIN uso as u on p.cod_uso=u.cod_uso WHERE p.estado_int=1 ')    
+        const [rows]= await pool.query('select * from vista_producto_medicamento')    
         if (rows) {
             res.status(200).json({
                 msg:'ok',
